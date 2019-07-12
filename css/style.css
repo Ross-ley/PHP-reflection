@@ -1,0 +1,7 @@
+body{
+    background-color: red;
+}
+.btn{
+    color:pink;
+    background-color: green !important;
+}

@@ -1,0 +1,10 @@
+This file is for setting up the database if you download the project and would like to test it.
+
+YOU WILL NEED A SERVER OR LOCALHOST TO RUN THIS PROJECT!!!
+
+When seting up the database you will need to make a tabe which acceps two values
+    .One is the name 
+    .Two is the Password
+
+This will alow your users to make an account within the project.
+This uses a basic database to make it easy for people to test on there own compute.
