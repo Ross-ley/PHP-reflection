@@ -32,9 +32,9 @@ $num = $pdo->query($s);
 $currentPass = $num->fetch(PDO::FETCH_ASSOC);
 var_dump($currentPass);
 if (password_verify($password, $currentPass['password'])){
-    header('location:../../home.php');
+    header('location:home.php');
     $_SESSION['username'] = $name;
 } else  {
-    header('location:../../login.php');
+    header('location:login.php');
 }
 

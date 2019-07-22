@@ -1,0 +1,6 @@
+{
+    "require": {
+        "jikan-me/jikan": "^2.8",
+        "curl/curl": "^2.2"
+    }
+}

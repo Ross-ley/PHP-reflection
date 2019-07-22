@@ -6,10 +6,18 @@
 ?>
 
 <?php include 'header.php'; ?>
+    <div class="nav-bar ">
+        <div class="active">
+            <a href="logout.php">Log Out</a>
+        </div>
+        
+    </div>
     <div class="container">
-    <a href="logout.php">Log Out</a>
         <h1>
             Welcome  <?PHP echo $_SESSION['username']; ?>  
         </h1>
+        <div>
+            <p>this is the context for the page</p>
+        </div>
     </div>
 <?php include 'footer.php'; ?>

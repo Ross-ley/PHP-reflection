@@ -1,7 +1,240 @@
+/*-----------------color palet---------*/
+/* 
+light to dark.
+Pale Aqua - #BFDBF7
+Dark Sky Blue - #81C3D7
+Steel Blue - #3A7CA5
+B'Dazzled Blue - #2F6690
+Japanese Indigo - #16425B  
+*/
+
+/*-------------main targes------------*/
 body{
-    background-color: red;
+  background-color: #BFDBF7;
+}
+.form-group{
+  margin-bottom:2rem;
+}
+.reset-page{
+  margin: 15px;
+}
+.space{
+  margin-bottom: 10px;
+}
+.flexy{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*-----------nav bar------------------*/
+.nav-bar{
+    background-color: #2F6690;
+    height: 50px;
+    justify-content: center;
+    display: flex;
+    font-size: 24px;
+    /* padding-left: 5rem; */
+}
+.active{
+    background-color:#BFDBF7;
+}
+.nav-bar a{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    color: black;
+}
+
+/*--------------berger-------------*/
+.atom {
+    position: relative;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    transition: all 300ms cubic-bezier(.61, .01, .42, 1);
+    cursor: pointer;
+    background: transparent;
+    border: 0px;
+}
+.burger {
+    height: 0px;
+    border: 1.5px solid #fff;
+    width: 22px;
+    display: block;
+    position: absolute;
+    transition: all 300ms cubic-bezier(.61, .01, .42, 1);
+    background:#fff;
+}  
+.atom:hover {
+  transition-delay: 100ms;
+  transform: scale(1.1);
+}
+.atom:hover .burger:nth-child(3):before {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #F26451;
+}
+.atom:hover .burger {
+  border: 2px solid #fff;
+  height: 9px;
+  border-radius: 50%;
+  margin-left: -1px;
+  margin-top: 2px;
+  animation: atom 300ms linear 1;
+  width: 25px;
+  top: 0px;
+  background:transparent;
+}
+.atom:focus {
+  outline: 0px;
+}
+.burger:nth-child(1) {
+  top: 0px;
+}
+.burger:nth-child(2) {
+  top: 8px;
+} 
+.burger:nth-child(3) {
+  top: 16px;
+}
+.burger:nth-child(3):before {
+  opacity: 0;
+  animation: ball 1.5s linear infinite;
+  content: '';
+  border: 2px solid #fff;
+  display: block;
+  position: relative;
+  top: 0.25px;
+}
+.atom:hover .burger:nth-child(1) {
+  transform: rotate(-33deg);
+}
+.atom:hover .burger:nth-child(2) {
+  transform: rotate(90deg);
+}
+.atom:hover .burger:nth-child(3) {
+  transform: rotate(33deg);
+}
+.atom:hover .burger:nth-child(3):before {
+  opacity: 1;
+  transition: opacity 600ms cubic-bezier(.61, .01, .42, 1);
+  ;
+}
+.atom:active:hover .burger:nth-child(3):before,
+.atom:active .burger:nth-child(3):before,
+.atom:active .burger:nth-child(2) {
+  opacity: 0;
+  transition: all 200ms;
+}
+.atom:active .burger {
+  border: 1.5px solid #fff;
+  height: 0px;
+  border-radius: 0%;
+  margin-left: -1px;
+  margin-top: 6px;
+  animation: division 300ms linear 1;
+  width: 25px;
+  top: 0px;
+}
+.atom:active .burger:nth-child(2) {
+  width: 0px;
+}
+.atom:active .burger:nth-child(3) {
+  transform: rotate(45deg);
+}
+.atom:active .burger:nth-child(1) {
+  transform: rotate(-45deg);
+}
+@keyframes atom {
+  0% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes division {
+  0% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes ball {
+  0% {
+    left: -20%;
+    top: 10%;
+  }
+  10% {
+    left: 10%;
+    top: -35%;
+  }
+  25% {
+    left: 45%;
+    top: -50%;
+  }
+  40% {
+    left: 80%;
+    top: -20%;
+  }
+  50% {
+    left: 98%;
+    top: 18%;
+  }
+  60% {
+    left: 80%;
+    top: 50%;
+  }
+  75% {
+    left: 45%;
+    top: 80%;
+  }
+  90% {
+    left: 0%;
+    top: 60%;
+  }
+  100% {
+    left: -20%;
+    top: 10%;
+  }
+}
+/*----------------cards--------------*/
+.card {
+  max-width: 300px ;
+  margin-bottom: 3rem;
+  height: 800px;
+}
+.card ~ .card{
+  margin-left:10px;
+}
+#results{
+  display: flex;
+  flex-direction: row;
+}
+.img-section{
+  height: 380px;
 }
 .btn{
-    color:pink;
-    background-color: green !important;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
+.card-img-top{
+  height: 380px;
+  object-fit: cover;
+}
+/* .card-body{
+
+}
+.card-title{
+
+}*/
+.card-text{
+margin-bottom: 40px;
+}
+
+/*-----------regester-page----------*/
+
+
+/*--------------login-page----------*/
+
+/*----------------footer------------*/
+footer{
+    background-color: #3A7CA5;
+    height: 50px;
 }
