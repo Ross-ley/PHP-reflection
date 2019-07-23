@@ -1,8 +1,10 @@
 <?php
     session_start();
+    
     if(!isset($_SESSION['username'])){
         header('location:login.php');
     }
+
 ?>
 
 <?php include 'header.php'; ?>
@@ -19,5 +21,6 @@
         <div>
             <p>this is the context for the page</p>
         </div>
+        <a href="reset_password.php">Reset password</a>
     </div>
 <?php include 'footer.php'; ?>

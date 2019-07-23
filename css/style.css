@@ -210,7 +210,7 @@ body{
   height: 380px;
 }
 .btn{
-  position: absolute;
+  /* position: absolute; */
   left: 10px;
   bottom: 10px;
 }
@@ -232,6 +232,9 @@ margin-bottom: 40px;
 
 
 /*--------------login-page----------*/
+
+/*-----------user-page--------------*/
+
 
 /*----------------footer------------*/
 footer{

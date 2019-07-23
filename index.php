@@ -1,4 +1,10 @@
 <?php
+/*
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 1200 //1200 Seconds is 20 Minutes
+    )
+));
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (isset($_POST['search'])) {
@@ -6,23 +12,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 	
 	//Anime page search
-	$responseA = file_get_contents("https://kitsu.io/api/edge/anime?filter[text]=" . $search);
+	// $responseA = file_get_contents("https://kitsu.io/api/edge/anime?filter[text]=" . $search, false, $ctx);
 	$responseA = json_decode($responseA);
 
 	//Manga page search
-	$responseM = file_get_contents("https://kitsu.io/api/edge/manga?filter[text]=" . $search);
+	// $responseM = file_get_contents("https://kitsu.io/api/edge/manga?filter[text]=" . $search, false, $ctx);
 	$responseM = json_decode($responseM);
 
 
 
 } else {
 	//Anime call page lode up
-	$responseA = file_get_contents("https://kitsu.io/api/edge/anime?filter[text]=shokugeki-no-souma");
+	// $responseA = file_get_contents("https://kitsu.io/api/edge/anime?filter[text]=shokugeki-no-souma", false, $ctx);
 	$responseA = json_decode($responseA);
 
 	// var_dump($responseA);
 	//Manga call page lode up
-	$responseM = file_get_contents("https://kitsu.io/api/edge/manga?filter[text]=shokugeki-no-souma");
+	// $responseM = file_get_contents("https://kitsu.io/api/edge/manga?filter[text]=shokugeki-no-souma", false, $ctx);
 	$responseM = json_decode($responseM);
 	
 }
@@ -109,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				}
 			} elseif (strpos($yolo[0], '404')) {
 				//checks if the img returns a null value if it dose default img shows.
-				$alt = '<h3>Sorry no image found</h3>';
+				$alt = 'Sorry no image found';
 			} else{
 				$imgM[] = $mainTargetM[$u]->coverImage->$size;
 				break;
@@ -124,9 +130,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 		$synopsisM[] = $mainTargetM[$u]->synopsis;
 	}
-	$alt = 'Sorry image not found not found.' ;
+	$alt = 'Sorry image not found.' ;
 
-
+*/
 include 'nav-bar.php';
 ?>
 
@@ -145,12 +151,12 @@ include 'nav-bar.php';
 				?>
             	<div class="card" > <!-- //card 1 -->
 	            	<div class="img-section">
-		            	<img class="card-img-top" src="<?php echo $imgA[$i]; ?>" alt="<?php echo $alt ?>">
+		            	<img class="card-img-top" src="<?php /*echo $imgA[$i];*/ ?>" alt="<?php /*echo $alt*/ ?>">
 	            	</div>
 	            	<div class="card-body">
-		            	<h5 class="card-title"><?php echo $titleA[$i]; ?></h5>
-		            	<p class="card-text"><?php echo substr($synopsisA[$i], 0, 200)."..."; ?></p>
-		            	<a href="<?php // echo $response->getUrl(); ?>" class="btn btn-primary" target="_blank">View on Kitsu</a>
+		            	<h5 class="card-title"><?php/* echo $titleA[$i];*/ ?></h5>
+		            	<p class="card-text"><?php /* echo substr($synopsisA[$i], 0, 200)."...";*/ ?></p>
+		            	<a href="<?php  /*echo $response->getUrl();*/ ?>" class="btn btn-primary" target="_blank">View on Kitsu</a>
                 	</div>
 				</div>
 				<?php
@@ -165,11 +171,11 @@ include 'nav-bar.php';
 				?>
         		<div class="card" >
 	        		<div class="img-section">
-		        		<img class="card-img-top" src="<?php echo $imgM[$u]; ?>" alt="<?php echo $alt ?>">
+		        		<img class="card-img-top" src="<?php /*echo $imgM[$u];*/ ?>" alt="<?php /*echo $alt*/ ?>">
 	        		</div>
 	        		<div class="card-body">
-		        		<h5 class="card-title"><?php  echo $titleM[$u]; ?></h5>
-		        		<p class="card-text"><?php  echo substr($synopsisM[$u], 0, 200)."..."; ?></p>
+		        		<h5 class="card-title"><?php /* echo $titleM[$u];*/ ?></h5>
+		        		<p class="card-text"><?php  /*echo substr($synopsisM[$u], 0, 200)."..."; */?></p>
 		        		<a href="<?php // echo $manga1->getUrl(); ?>" class="btn btn-primary" target="_blank">View on Kitsu</a> 
             		</div>
 				</div>

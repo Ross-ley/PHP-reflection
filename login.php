@@ -1,4 +1,5 @@
-<?php include 'nav-bar.php'; 
+<?php 
+include 'nav-bar.php'; 
 ?>
     <div class="second">
         <div class="container">
