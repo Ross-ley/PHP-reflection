@@ -209,8 +209,8 @@ body{
 .img-section{
   height: 380px;
 }
-.btn{
-  /* position: absolute; */
+.btn-card{
+  position: absolute;
   left: 10px;
   bottom: 10px;
 }

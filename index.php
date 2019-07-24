@@ -156,7 +156,7 @@ include 'nav-bar.php';
 	            	<div class="card-body">
 		            	<h5 class="card-title"><?php/* echo $titleA[$i];*/ ?></h5>
 		            	<p class="card-text"><?php /* echo substr($synopsisA[$i], 0, 200)."...";*/ ?></p>
-		            	<a href="<?php  /*echo $response->getUrl();*/ ?>" class="btn btn-primary" target="_blank">View on Kitsu</a>
+		            	<a href="<?php  /*echo $response->getUrl();*/ ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a>
                 	</div>
 				</div>
 				<?php
@@ -176,7 +176,7 @@ include 'nav-bar.php';
 	        		<div class="card-body">
 		        		<h5 class="card-title"><?php /* echo $titleM[$u];*/ ?></h5>
 		        		<p class="card-text"><?php  /*echo substr($synopsisM[$u], 0, 200)."..."; */?></p>
-		        		<a href="<?php // echo $manga1->getUrl(); ?>" class="btn btn-primary" target="_blank">View on Kitsu</a> 
+		        		<a href="<?php // echo $manga1->getUrl(); ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a> 
             		</div>
 				</div>
 				<?php

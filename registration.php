@@ -45,6 +45,4 @@
 
     header('location:login.php');
 
-
-
 ?>
