@@ -24,6 +24,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <div>
             <p>this is the context for the page</p>
         </div>
-        <a href="reset_password.php">Reset password</a>
+        <a href="reset-password.php">Reset password</a>
     </div>
 <?php include 'footer.php'; ?>

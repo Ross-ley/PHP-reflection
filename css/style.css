@@ -25,6 +25,15 @@ body{
   display: flex;
   justify-content: space-between;
 }
+.bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.container{
+  /* margin-left: 15%; */
+
+}
 
 /*-----------nav bar------------------*/
 .nav-bar{
@@ -205,6 +214,7 @@ body{
 #results{
   display: flex;
   flex-direction: row;
+  /* width: 80rem; */
 }
 .img-section{
   height: 380px;
@@ -235,6 +245,10 @@ margin-bottom: 40px;
 
 /*-----------user-page--------------*/
 
+/*------------contact-us-page-------*/
+.flexy form{
+  width: 80vw;
+}
 
 /*----------------footer------------*/
 footer{
