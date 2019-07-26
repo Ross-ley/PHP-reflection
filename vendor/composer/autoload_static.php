@@ -27,6 +27,7 @@ class ComposerStaticInit8790c727903596b2c0961f5827f6528e
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'J' => 
         array (
@@ -65,6 +66,10 @@ class ComposerStaticInit8790c727903596b2c0961f5827f6528e
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Jikan\\' => 
         array (

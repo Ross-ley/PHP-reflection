@@ -80,19 +80,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$titleA = [];
 	$synopsisA = [];
 	$sizes = ['original', 'large', 'small', 'tiny'] ;
-	$langs = ['en','en_jp','ja_jp','en_cn','zh_cn'];
+	$langs = ['en','en_jp','ja_jp','en_cn','zh_cn','en_us'];
 
 	for($i = 0; $i < 5; $i++) {
 		$mainTargetA[] = $responseA->data[$i]->attributes;
+		$linkTargetA[] = $responseA->data[$i]->links;
 		foreach ($sizes as $size) {
 			if (empty($mainTargetA[$i]->posterImage->$size)) {
 				if (empty($mainTargetA[$i]->coverImage->$size)) {
 					// Default image if none found.
 					$imgA[] = 'http://atlas-content-cdn.pixelsquid.com/stock-images/broken-heart-z0VDl3D-600.jpg';
+					break;
 
 				} elseif (strpos(get_headers($mainTargetA[$i]->coverImage->$size, 1)[0], '404')) {
 						//checks if the img has a 404 in its head if it dose then it returns a broken img else it returns the img.
 						$imgA[] = 'http://atlas-content-cdn.pixelsquid.com/stock-images/broken-heart-z0VDl3D-600.jpg';
+						break;
 				} else {
 					$imgA[] = $mainTargetA[$i]->coverImage->$size;
 					break;
@@ -100,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			} elseif (strpos(get_headers($mainTargetA[$i]->posterImage->$size, 1)[0], '404')) {
 					//checks if the img has a 404 in its head if it dose then it returns a broken img else it returns the img.
 					$imgA[] = 'http://atlas-content-cdn.pixelsquid.com/stock-images/broken-heart-z0VDl3D-600.jpg';
+					break;
 			} else {
 				$imgA[] = $mainTargetA[$i]->posterImage->$size;
 				break;
@@ -107,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		} // end foreach
 		foreach ($langs as $lang) {
 			if (empty($mainTargetA[$i]->titles->$lang)) {
-				// $titleA[] = "Sorry no title.";
+				//dont populate other wise the it will overwrite the title code/
 			} else {
 				$titleA[] = $mainTargetA[$i]->titles->$lang;
 				break;
@@ -120,13 +124,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	//Manga
 	$mainTargetM = [];
+	$linkTargetM = [];
 	$imgM = [];
 	$titleM = [];
 	$synopsisM = [];
-	$langs = ['en','en_jp','en_cn', 'en_kr'];
+	$langs = ['en','en_jp','en_cn', 'en_kr', 'en_us', 'ja_jp'];
 
 	for($i = 0; $i < 5; $i++) {
 		$mainTargetM[] = $responseM->data[$i]->attributes;
+		$linkTargetM[] = $responseM->data[$i]->links;
 		foreach ($sizes as $size) {
 			if (empty($mainTargetM[$i]->posterImage->$size)) {
 				if (empty($mainTargetM[$i]->coverImage->$size)) {
@@ -172,7 +178,7 @@ include 'nav-bar.php';
                 <input type="text" name="search" placeholder="Search.."/>
                 <button type="submit">Search</button>
             </form>
-            <br/>
+			<br/>
             <h2>Animes</h2>
             <div id="results" data-url="#">
 				<?php
@@ -185,7 +191,7 @@ include 'nav-bar.php';
 	            	<div class="card-body">
 		            	<h5 class="card-title"><?php echo $titleA[$i]; ?></h5>
 		            	<p class="card-text"><?php  echo substr($synopsisA[$i], 0, 200)."..."; ?></p>
-		            	<a href="<?php  //echo $response->getUrl(); ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a>
+		            	<a href="<?php  echo "https://kitsu.io/anime" . substr($linkTargetA[$i]->self, 31); ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a>
                 	</div>
 				</div>
 				<?php
@@ -205,7 +211,7 @@ include 'nav-bar.php';
 	        		<div class="card-body">
 		        		<h5 class="card-title"><?php echo $titleM[$i]; ?></h5>
 		        		<p class="card-text"><?php  echo substr($synopsisM[$i], 0, 200)."..."; ?></p>
-		        		<a href="<?php // echo $manga1->getUrl(); ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a> 
+		        		<a href="<?php  echo "https://kitsu.io/manga" . substr($linkTargetM[$i]->self, 31); ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a> 
             		</div>
 				</div>
 				<?php

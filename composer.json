@@ -1,6 +1,7 @@
 {
     "require": {
         "jikan-me/jikan": "^2.8",
-        "curl/curl": "^2.2"
+        "curl/curl": "^2.2",
+        "phpmailer/phpmailer": "^6.0"
     }
 }
