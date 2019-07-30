@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include config file
-require_once "config.php";
+require_once("inc/config.php");
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $mysqli->close();
 }
 
-include 'nav-bar.php'; 
+include('inc/nav-bar.php'); 
 ?>
     <div class="second">
         <div class="container">
@@ -117,4 +117,4 @@ include 'nav-bar.php';
             </div>
         </div>
     </div>
-<?php include 'footer.php'; ?>
+<?php include('inc/footer.php'); ?>
