@@ -82,7 +82,7 @@ include("inc/nav-bar.php");
                 if(isset($error_message)){
                 echo '<p class="message">' . $error_message . '</p>';
                 } else {
-                echo '<p>If you think there is something I&rsquo;m wrong or you need help, let me know! Complete the form to send me an email.</p>';
+                echo '<p>If you think there is something wrong or you need help, let me know! Complete the form to send me an email.</p>';
                 }
     ?>
         <form method="post" action="contact-form.php">
