@@ -1,4 +1,5 @@
 <?php
+
 /** random anime defalut when page loads */
 function randomAM() {
 	$names = array(
@@ -48,16 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (empty($search)) {
 		$search = $strA;
 	}
-	
+
 	//Anime page search
-	$responseA = file_get_contents("https://kitsu.io/api/edge/anime?filter[text]=" . $search);
+	$responseA = file_get_contents("https://kitsu.io/api/edge/anime?filter[text]=" . $search); //"?page[limit]=5&page[offset]=20"
 	$responseA = json_decode($responseA);
 
 	//Manga page search
 	$responseM = file_get_contents("https://kitsu.io/api/edge/manga?filter[text]=" . $search);
 	$responseM = json_decode($responseM);
-
-	
 
 
 
@@ -80,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$titleA = [];
 	$synopsisA = [];
 	$sizes = ['original', 'large', 'small', 'tiny'] ;
-	$langs = ['en','en_jp','ja_jp','en_cn','zh_cn','en_us'];
+	$langs = ['en_jp','ja_jp','en_cn','zh_cn','en_us', '', 'en'];
 
 	for($i = 0; $i < 5; $i++) {
 		$mainTargetA[] = $responseA->data[$i]->attributes;
@@ -110,12 +109,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			}
 		} // end foreach
 		foreach ($langs as $lang) {
-			if (empty($mainTargetA[$i]->titles->$lang)) {
-				//dont populate other wise the it will overwrite the title code/
-			} else {
+			if (!empty($mainTargetA[$i]->titles->$lang)){
 				$titleA[] = $mainTargetA[$i]->titles->$lang;
 				break;
-			}
+			} 
+			// else {
+			// 	$titleA[$i] = "Sorry no Title avalibel";
+			// }
 		}
 		if (empty($synopsisA[] = $mainTargetA[$i]->synopsis)) {
 			$synopsisA[$i] = "Sorry there is no blurb";
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$imgM = [];
 	$titleM = [];
 	$synopsisM = [];
-	$langs = ['en','en_jp','en_cn', 'en_kr', 'en_us', 'ja_jp'];
+	$langs = ['en_jp','en_cn', 'en_kr', 'en_us', 'ja_jp', 'en_th', 'en', ''];
 
 	for($i = 0; $i < 5; $i++) {
 		$mainTargetM[] = $responseM->data[$i]->attributes;
@@ -155,18 +155,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			}
 		} // end foreach
 		foreach ($langs as $lang) {
-			if (empty($mainTargetM[$i]->titles->$lang)) {
-				//dont populate other wise the it will overwrite the title code/
-			} else {
+			if (!empty($mainTargetM[$i]->titles->$lang)) {
 				$titleM[] = $mainTargetM[$i]->titles->$lang;
 				break;
-			}
+			} 
 		}
+		// if (!empty($mainTargetM[$i]->titles->$lang)) {
+		// 	$titleM[] = $mainTargetM[$i]->titles->$lang;
+		// 	break;
+		// }else {
+		// 	$titleM[] = "Sorry no title avalble";
+		// }
 		if (empty($synopsisM[] = $mainTargetM[$i]->synopsis)) {
 			$synopsisM[$i] = "Sorry there is no blurb";
 		}
 	}
-	$alt = 'Sorry image not found.'; 
+	
+	// // this tests to see if the data array is populated.
+	// $targetA = [];
+	// $targetM = [];
+	// $targetA[] = $responseA->data;
+	// $targetM[] = $responseM->data;
+	// if (empty($targetA) || empty($targetM)) {
+	// 	echo "This should be empty";
+	// } else {
+	// 	echo "this should be full";
+	// }
+	// $alt = 'Sorry image not found.'; 
+
+	/** need to remove as these are for test. */
+
+	// var_dump('https://kitsu.io/api/edge/anime?filter[text]=amazing-nurse-nanako');
+	//  var_dump('https://kitsu.io/api/edge/anime?filter[text]=amazing-nurse-nanako?page[limit]=5&page[offset]=0');
+
+
 
 include 'nav-bar.php';
 ?>
@@ -198,6 +220,15 @@ include 'nav-bar.php';
 					};
 				?>
 			</div>
+			<!-- <div class="pag">
+				<span class="last">
+					<a href="<?php $responseA ?>">Previours</a>
+				</span>
+				<span class="next">
+					<a href="<?php $responseA ?>">Next</a>
+				</span>
+			</div> -->
+
 				
         	<h2>Manga</h2>
         	<div id="results" class="space">

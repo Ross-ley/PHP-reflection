@@ -1,61 +1,179 @@
 <?php
+// require 'vendor/autoload.php';
+// use PHPMailer\PHPMailer\PHPMailer;
 
-include 'nav-bar.php';
-?>
-<div class="third">
-    <div class="container">
+// // an email address that will be in the From field of the email.
+// $fromEmail = 'demo@domain.com';
+// $fromName = 'Demo contact form';
 
-        <div class="row">
-        <h1>Contact Us</h1>
-            <div class="col-xl-8 offset-xl-2 py-5">
-                <form id="contact-form" method="post" action="contact-mail.php" role="form">
-                    <div class="messages"></div>
-                    <div class="controls">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_name">Firstname *</label>
-                                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_lastname">Lastname *</label>
-                                    <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="form_email">Email *</label>
-                                    <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="form_message">Message *</label>
-                                    <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="submit" class="btn btn-success btn-send" value="Send message">
-                            </div>
-                        </div>
-                        <div class="row">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<?php
-include 'footer.php';
-?>
+// // an email address that will receive the email with the output of the form
+// $sendToEmail = 'rbunn1997@gmail.com';
+// $sendToName = 'Ross-ley';
+
+// // subject of the email
+// $subject = 'New message from contact form';
+
+// // smtp credentials and server
+
+// $smtpHost = 'smtp.gmail.com';
+// $smtpUsername = 'rbunn1997@gmail.com';
+// $smtpPassword = 'Pokemon1997';
+
+// // form field names and their translations.
+// // array variable name => Text to appear in the email
+// $fields = array('name' => 'Name', 'surname' => 'Surname', 'phone' => 'Phone', 'email' => 'Email', 'message' => 'Message');
+
+// // message that will be displayed when everything is OK :)
+// $okMessage = 'Contact form successfully submitted. Thank you, I will get back to you soon!';
+
+// // If something goes wrong, we will display this message.
+// $errorMessage = 'There was an error while submitting the form. Please try again later';
+
+
+// // if you are not debugging and don't need error reporting, turn this off by error_reporting(0);
+// error_reporting(E_ALL & ~E_NOTICE);
+
+// try {
+//     if (count($_POST) == 0) {
+//         throw new \Exception('Form is empty');
+//     }
+    
+//     $emailTextHtml = "<h1>You have a new message from your contact form</h1><hr>";
+//     $emailTextHtml .= "<table>";
+    
+//     foreach ($_POST as $key => $value) {
+//         // If the field exists in the $fields array, include it in the email
+//         if (isset($fields[$key])) {
+//             $emailTextHtml .= "<tr><th>$fields[$key]</th><td>$value</td></tr>";
+//         }
+//     }
+//     $emailTextHtml .= "</table><hr>";
+//     $emailTextHtml .= "<p>Have a nice day,<br>Best,<br>Ondrej</p>";
+    
+//     $mail = new PHPMailer;
+    
+//     $mail->setFrom($fromEmail, $fromName);
+//     $mail->addAddress($sendToEmail, $sendToName); // you can add more addresses by simply adding another line with $mail->addAddress();
+//     $mail->addReplyTo($from);
+    
+//     $mail->isHTML(true);
+    
+//     $mail->Subject = $subject;
+//     $mail->Body    = $emailTextHtml;
+//     $mail->msgHTML($emailTextHtml); // this will also create a plain-text version of the HTML email, very handy
+    
+    
+//     $mail->isSMTP();
+    
+//     //Enable SMTP debugging
+//     // 0 = off (for production use)
+//     // 1 = client messages
+//     // 2 = client and server messages
+//     $mail->SMTPDebug = 2;
+//     $mail->Debugoutput = 'html';
+    
+//     //Set the hostname of the mail server
+//     // use
+//     // $mail->Host = gethostbyname('smtp.gmail.com');
+//     // if your network does not support SMTP over IPv6
+//     $mail->Host = gethostbyname($smtpHost);
+    
+//     //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+//     $mail->Port = 587;
+//     // echo "QUIT | openssl s_client -starttls smtp -crlf -connect smtp.gmail.com:587"
+
+    
+//     //Set the encryption system to use - ssl (deprecated) or tls
+//     $mail->SMTPSecure = 'tls';
+    
+//     //Whether to use SMTP authentication
+//     $mail->SMTPAuth = true;
+    
+//     //Username to use for SMTP authentication - use full email address for gmail
+//     // $mail->Username = $smtpHost;
+    
+//     //Password to use for SMTP authentication
+//     // $mail->Password = $smtpPassword;
+    
+//     if (!$mail->send()) {
+//         throw new \Exception('I could not send the email.' . $mail->ErrorInfo);
+//     }
+    
+//     $responseArray = array('type' => 'success', 'message' => $okMessage);
+// } catch (\Exception $e) {
+//     // $responseArray = array('type' => 'danger', 'message' => $errorMessage);
+//     $responseArray = array('type' => 'danger', 'message' => $e->getMessage());
+// }
+
+
+// // if requested by AJAX request return JSON response
+// if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+//     $encoded = json_encode($responseArray);
+    
+//     // header('Content-Type: application/json');
+    
+//     echo $encoded;
+
+//     header('index.php');
+// }
+// // else just display the message
+// header('index.php');
+// else {
+//     echo $responseArray['message'];
+// }
+
+if($_POST) {
+    $visitor_name = "";
+    $visitor_email = "";
+    $email_title = "";
+    $concerned_department = "";
+    $visitor_message = "";
+     
+    if(isset($_POST['visitor_name'])) {
+        $visitor_name = filter_var($_POST['visitor_name'], FILTER_SANITIZE_STRING);
+    }
+     
+    if(isset($_POST['visitor_email'])) {
+        $visitor_email = str_replace(array("\r", "\n", "%0a", "%0d"), '', $_POST['visitor_email']);
+        $visitor_email = filter_var($visitor_email, FILTER_VALIDATE_EMAIL);
+    }
+     
+    if(isset($_POST['email_title'])) {
+        $email_title = filter_var($_POST['email_title'], FILTER_SANITIZE_STRING);
+    }
+     
+    if(isset($_POST['concerned_department'])) {
+        $concerned_department = filter_var($_POST['concerned_department'], FILTER_SANITIZE_STRING);
+    }
+     
+    if(isset($_POST['visitor_message'])) {
+        $visitor_message = htmlspecialchars($_POST['visitor_message']);
+    }
+     
+    if($concerned_department == "billing") {
+        $recipient = "rbunn1997@gmail.com";
+    }
+    else if($concerned_department == "marketing") {
+        $recipient = "rbunn1997@gmail.com";
+    }
+    else if($concerned_department == "technical support") {
+        $recipient = "rbunn1997@gmail.com";
+    }
+    else {
+        $recipient = "rbunn1997@gmail.com";
+    }
+     
+    $headers  = 'MIME-Version: 1.0' . "\r\n"
+    .'Content-type: text/html; charset=utf-8' . "\r\n"
+    .'From: ' . $visitor_email . "\r\n";
+     
+    if(mail($recipient, $email_title, $visitor_message, $headers)) {
+        echo "<p>Thank you for contacting us, $visitor_name. You will get a reply within 24 hours.</p>";
+    } else {
+        echo '<p>We are sorry but the email did not go through.</p>';
+    }
+     
+} else {
+    echo '<p>Something went wrong</p>';
+}
+ 
