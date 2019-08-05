@@ -4,6 +4,7 @@ require 'vender/phpmailer/src/PHPMailer.php';
 require 'vender/phpmailer/src/Exception.php';
 require 'vender/phpmailer/src/SMTP.php';
 
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   $name = trim(filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING));
   $email = trim(filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL));
@@ -54,9 +55,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     //It's important not to use the submitter's address as the from address as it's forgery,
     //which will cause your messages to fail SPF checks.
     //Use an address in your own domain as the from address, put the submitter's address in a reply-to
-    $mail->setFrom('ross.ley1997@gmail.com', $name);
+
+    $mail->setFrom( $email, $name);
     $mail->addReplyTo($email, $name);
-    $mail->addAddress('ross.ley1997@gmail.com', 'Ross-ley Bunn');
+    $mail->addAddress($email, 'Ross-ley Bunn');
     $mail->Subject = "Bug fix suggestions from " . $name; //title of email that comes through
     $mail->Body = $email_body;
     if ($mail->send()) {
@@ -67,50 +69,51 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 };
 
-$section = "suggest";
+// echo isLogedIn();
 
 include("inc/nav-bar.php");
 ?>
 <div class="third">
+  <div class="container">
     <div class="section page">
-    <div class="wrapper">
-        <h1>Get in Contact</h1>
-        <?php if(isset($_GET["status"]) && $_GET["status"] == "thanks")
-            {
-                echo "<p>Thanks for the email!</p>";
-            } else { 
-                if(isset($error_message)){
-                echo '<p class="message">' . $error_message . '</p>';
-                } else {
-                echo '<p>If you think there is something wrong or you need help, let me know! Complete the form to send me an email.</p>';
-                }
-    ?>
-        <form method="post" action="contact-form.php">
-            <table>
-                <tr>
-                <th><label for="name">Name (required)</label></th>
-                <td><input type="text" id="name" name="name"  value="<?php if(isset($name)) echo $name; ?>"/></td>
-                </tr>
-                <tr>
-                <th><label for="email">Email (required)</label></th>
-                <td><input type="text" id="email" name="email" value="<?php if(isset($email)) echo $email; ?>"/></td>
-                </tr>
-
-                <tr>
-                <th><label for="name">Additional Details</label></th>
-                <td><textarea name="details" id="details" ><?php if(isset($details)) echo htmlspecialchars($_POST['details']); ?></textarea></td>
-                </tr>
-                <tr style="display:none">
-                <th><label for="address">Address</label></th>
-                <td><input type="text" id="address" name="address" />
-                    <p>Please leave this field blank</p>
-                </td>
-                </tr>
-            </table>
-            <input type="submit" value="Send" />
-        </form>
-        <?php } ?>
+      <div class="wrapper">
+          <h1>Get in Contact</h1>
+          <?php if(isset($_GET["status"]) && $_GET["status"] == "thanks")
+              {
+                  echo "<p>Thanks for the email!</p>";
+              } else { 
+                  if(isset($error_message)){
+                  echo '<p class="message">' . $error_message . '</p>';
+                  } else {
+                  echo '<p>If you think there is something wrong or you need help, let me know!</p>';
+                  }
+      ?>
+          <form method="post" action="contact-form.php">
+              <table class="table">
+                  <tr class="flexy">
+                  <th><label for="name">Name (required)</label></th>
+                  <td><input type="text" id="name" name="name"  value="<?php if(isset($name)) echo $name; ?>"/></td>
+                  </tr>
+                  <tr class="flexy">
+                  <th><label for="email">Email (required)</label></th>
+                  <td><input type="text" id="email" name="email" value="<?php if(isset($email)) echo $email; ?>"/></td>
+                  </tr>
+                  <tr class="flexy">
+                  <th><label for="name">Details</label></th>
+                  <td><textarea name="details" id="details" ><?php if(isset($details)) echo htmlspecialchars($_POST['details']); ?></textarea></td>
+                  </tr>
+                  <tr style="display:none">
+                  <th><label for="address">Address</label></th>
+                  <td><input type="text" id="address" name="address" />
+                      <p>Please leave this field blank</p>
+                  </td>
+                  </tr>
+              </table>
+              <button type="submit" value="Send" class="btn contact-btn">Send</button>
+          </form>
+          <?php } ?>
         </div>
+      </div>
     </div>
 </div>
 

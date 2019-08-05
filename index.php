@@ -1,6 +1,6 @@
 <?php 
-include("inc/data.php");
 include("inc/functions.php");
+
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 	//Anime
-
 	$mainTargetA = [];
 	$imgA = [];
 	$titleA = [];
@@ -131,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$synopsisM[$i] = "Sorry there is no blurb";
 		}
 	}
-	
+
 	// // this tests to see if the data array is populated.
 	// $targetA = [];
 	// $targetM = [];
@@ -148,15 +147,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	// var_dump('https://kitsu.io/api/edge/anime?filter[text]=amazing-nurse-nanako');
 	//  var_dump('https://kitsu.io/api/edge/anime?filter[text]=amazing-nurse-nanako?page[limit]=5&page[offset]=0');
-
+	// echo isLogedIn();
 
 
 include('inc/nav-bar.php');
 ?>
-    <div class="Main">
+	<?php
+		if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+	?>
+    	<div class="" id="logedIn">
+	<?php 
+		} else {
+	?>
+		<div class="Main">
+	<?php 
+		}
+	?>
         <div class="container">
-            <h2>Anime search bar</h2>
-            <form method="post" action="index.php">
+			<?php
+			 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+			?>
+			<h1>
+				Welcome  <?PHP echo $_SESSION['username']; ?> 
+			</h1>
+			<?php 
+			 } else {
+			?>
+			<h2>Anime search bar</h2>
+			<?php 
+			 }
+			?>
+			<?php
+			 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+			?>
+            <form method="post" action="user.php">
+			<?php 
+			 } else {
+			?>
+			<form method="post" action="index.php">
+			<?php 
+			 }
+			?>
                 <input type="text" name="search" placeholder="Search.."/>
                 <button type="submit">Search</button>
             </form>
@@ -173,22 +204,24 @@ include('inc/nav-bar.php');
 	            	<div class="card-body">
 		            	<h5 class="card-title"><?php echo $titleA[$i]; ?></h5>
 		            	<p class="card-text"><?php  echo substr($synopsisA[$i], 0, 200)."..."; ?></p>
-		            	<a href="<?php  echo "https://kitsu.io/anime" . substr($linkTargetA[$i]->self, 31); ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a>
+						<a href="<?php  echo "https://kitsu.io/anime/" . substr($linkTargetA[$i]->self, 32); ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a>
+						<?php 
+							if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+						?>
+						<div class="anime">
+							<div class="animeStar">
+								<span data-id="<?php	echo substr($linkTargetA[$i]->self, 32 ); ?>" class="fa fa-star fa-2x disactive_star"></span>
+							</div>
+						</div>
+						<?php
+							}
+						?>
                 	</div>
 				</div>
 				<?php
 					};
 				?>
 			</div>
-			<!-- <div class="pag">
-				<span class="last">
-					<a href="<?php $responseA ?>">Previours</a>
-				</span>
-				<span class="next">
-					<a href="<?php $responseA ?>">Next</a>
-				</span>
-			</div> -->
-
 				
         	<h2>Manga</h2>
         	<div id="results" class="space">
@@ -203,12 +236,36 @@ include('inc/nav-bar.php');
 		        		<h5 class="card-title"><?php echo $titleM[$i]; ?></h5>
 		        		<p class="card-text"><?php  echo substr($synopsisM[$i], 0, 200)."..."; ?></p>
 		        		<a href="<?php  echo "https://kitsu.io/manga" . substr($linkTargetM[$i]->self, 31); ?>" class="btn btn-primary btn-card" target="_blank">View on Kitsu</a> 
-            		</div>
+					</div>
+					<?php 
+							if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+						?>
+						<div class="manga">
+							<div class="mangaStar">
+								<span data-id="<?php	echo substr($linkTargetM[$i]->self, 32 ); ?>" class="fa fa-star fa-2x disactive_star"></span>
+							</div>
+						</div>
+						<?php
+							}
+						?>
 				</div>
 				<?php
-					};
+					}
 				?>
 			</div>
 		</div>
+		<?php
+			if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+		?>
+			<a href="reset-password.php" class="btn Reset-btn">Reset password</a>
+			<div class="user_likeA">
+			<a href="inc/favirot/anime-fav.php" class="btn Reset-btn">Liked Anime</a>
+			</div>
+			<div class="user_likeM">
+			<a href="inc/favirot/manga-fav.php" class="btn Reset-btn">Liked Manga</a> 
+			</div>
+		<?php 
+			}
+		?>
 	</div>
 <?php include("inc/footer.php"); ?>

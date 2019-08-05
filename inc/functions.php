@@ -28,14 +28,20 @@ $replaced = preg_replace_callback("~([a-z]+)\(\)~",
 
 /** end of random anime */
 
-	/** random manga defalut when page loads */
-	function Manga() {return randomAM();}
-	$strM="https://kitsu.io/api/edge/manga?filter[text]=". Manga();
+/** random manga defalut when page loads */
+function Manga() {return randomAM();}
+$strM="https://kitsu.io/api/edge/manga?filter[text]=". Manga();
 
+$replaced = preg_replace_callback("~([a-z]+)\(\)~", 
+    function ($m){
+        return $m[1]();
+	}, $strM
+);
+/** end of random manga */
 
-	$replaced = preg_replace_callback("~([a-z]+)\(\)~", 
-     	function ($m){
-          	return $m[1]();
-		}, $strM
-	);
-		/** end of random manga */
+function isLogedIn() {
+	if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+		header("location: inc/user.php");
+		exit;
+	}
+}

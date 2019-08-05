@@ -1,7 +1,7 @@
 <?php
 
 // Include config file
-require_once("inc/config.php");
+include('inc/config.php');
  
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
@@ -17,9 +17,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT id FROM users WHERE username = ?";
         
-        if($stmt = $mysqli->prepare($sql)){
+        if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("s", $param_username);
+            $stmt->bindParam(1, $param_username);
             
             // Set parameters
             $param_username = trim($_POST["username"]);
@@ -27,9 +27,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // store result
-                $stmt->store_result();
+                $userResults = $stmt->fetch(PDO::FETCH_ASSOC);
                 
-                if($stmt->num_rows == 1){
+                if($userResults){
                     $username_err = "This username is already taken.";
                 } else{
                     $username = trim($_POST["username"]);
@@ -38,9 +38,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "Oops! Something went wrong. Please try again later.";
             }
         }
-         
-        // Close statement
-        $stmt->close();
     }
     
     // Validate password
@@ -68,14 +65,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare an insert statement
         $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
          
-        if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ss", $param_username, $param_password);
-            
+        if($stmt = $pdo->prepare($sql)){
+
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+             
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(1, $param_username);
+            $stmt->bindParam(2, $param_password);
             
+           
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
@@ -85,12 +85,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         }
          
-        // Close statement
-        $stmt->close();
+
     }
     
-    // Close connection
-    $mysqli->close();
+
 }
 
     include('inc/nav-bar.php');

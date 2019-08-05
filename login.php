@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include config file
-require_once("inc/config.php");
+include('inc/config.php');
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -36,10 +36,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
+
         
-        if($stmt = $mysqli->prepare($sql)){
+        if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("s", $param_username);
+            $stmt->bindParam(1, $param_username);
             
             // Set parameters
             $param_username = $username;
@@ -47,14 +48,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Store result
-                $stmt->store_result();
+                $results = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                 // Check if username exists, if yes then verify password
-                if($stmt->num_rows == 1){                    
+                if($results){                    
                     // Bind result variables
-                    $stmt->bind_result($id, $username, $hashed_password);
-                    if($stmt->fetch()){
-                        if(password_verify($password, $hashed_password)){
+                    if($results){
+                        if(password_verify($password, $results['password'])){
                             // Password is correct, so start a new session
                             session_start();
                             
@@ -80,11 +80,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         
         // Close statement
-        $stmt->close();
     }
     
     // Close connection
-    $mysqli->close();
+    
 }
 
 include('inc/nav-bar.php'); 

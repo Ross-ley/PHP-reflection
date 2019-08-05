@@ -11,6 +11,34 @@ function openNav() {
   }
 
 /*Jquery*/
+// $('body').on('click', function(){
+//     if( parseInt( $('#mySidenav').css('width') ) > 0 ){
+//       closeNav();
+//     }
+//   });
+
+// $(document).ready(function(){
+
+//     $("fa-star").on(click, function {
+//         $("fa-star").addClass("active_star");
+//         $("fa-star").removeClass("disactive_star");
+//     })
+    
+//     $("fa-star").on(click, function {
+//         $("fa-star").addClass("disactive_star");
+//         $("fa-star").removeClass("active_star");
+//     })
+// });
+
+$('.anime').click(function(e){
+    $(e.target).toggleClass('disactive_star active_star')
+});
+
+$('.manga').click(function(e){
+    $(e.target).toggleClass('disactive_star active_star')
+});
+
+
 $(document).ready(function(){
     if ($("div").hasClass("Main")){
         $('#home').addClass("active");
@@ -19,6 +47,9 @@ $(document).ready(function(){
         $("#home").removeClass("active");
     } else if ($("div").hasClass("third")){
         $("#contact").addClass("active");
+        $("#home").removeClass("active");
+    } else {
+        $("#logedIn").addClass("active");
         $("#home").removeClass("active");
     }
 });
@@ -71,4 +102,37 @@ $(function () {
             return false;
         }
     })
+}); 
+
+$(function () {
+
+    $('user.php').validator();
+
+    // when the form is submitted
+    $('.anime, .manga').on('click', function (e) {
+
+        // if the validator does not prevent form submit
+        if (!e.isDefaultPrevented()) {
+            var url = "ajax-call/anime-likes.php";
+// console.log($(e.target).parent().hasClass('animeStar'));
+            // POST values in the background the the script URL
+            if ($(e.target).parent().hasClass('animeStar')) {
+                var table = 1;
+            } else {
+                var table = 2;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: { 'id': $(e.target).data('id'), 'table': table },
+                success: function (data)
+                {
+                    // console.log(data);
+                }
+            });
+            return false;
+        }
+    })
 });
+

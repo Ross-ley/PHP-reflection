@@ -1,16 +1,23 @@
 <?php
-/* Database credentials.*/
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'userregistration');
 
-// require __DIR__."/vendor/autoload.php";
+error_reporting(E_ALL);
+error_reporting(-1);
 
-/* Attempt to connect to MySQL database */
-$mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
- 
-// Check connection
-if($mysqli === false){
-    die("ERROR: Could not connect. " . $mysqli->connect_error);
+// making the object
+$host = "localhost";
+$db = "userregistration";
+$user = "root";
+$pass = "";
+
+$dsn = "mysql:host=$host;dbname=$db";
+$attributes = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+];
+try {
+    $pdo = new PDO($dsn, $user, $pass, $attributes);
+} catch (PDOException $e) {
+    echo "<pre>Cannot connect to Database";
+    echo $e->getMessage();
+    echo "</pre>";
+    exit;
 }
