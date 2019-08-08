@@ -36,6 +36,10 @@ body{
   bottom: 0;
   width: 100%;
 }
+.max{
+  padding-top: 30px;
+  height: 89.7vh;
+}
 /*-----------nav bar------------------*/
 .nav-bar{
     background-color: #2F6690;
@@ -273,6 +277,15 @@ margin-bottom: 40px;
 }
 .disactive_star{
   color: black;
+}
+.Reset_btn{
+
+}
+.manga_btn{
+
+}
+.anime_btn{
+
 }
 
 /*------------contact-us-page-------*/

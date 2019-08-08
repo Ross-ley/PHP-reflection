@@ -1,0 +1,7 @@
+Main database name: userregisttration
+extra database: animelike, mangalike, users.
+
+
+animelike coloms: username, id.
+mangalike coloms: username, id.
+users coloms: id, username, password.

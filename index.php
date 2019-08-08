@@ -1,8 +1,6 @@
 <?php 
 include("inc/functions.php");
 
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (isset($_POST['search'])) {
 		$search = urlencode($_POST['search']);
@@ -120,34 +118,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				break;
 			} 
 		}
-		// if (!empty($mainTargetM[$i]->titles->$lang)) {
-		// 	$titleM[] = $mainTargetM[$i]->titles->$lang;
-		// 	break;
-		// }else {
-		// 	$titleM[] = "Sorry no title avalble";
-		// }
 		if (empty($synopsisM[] = $mainTargetM[$i]->synopsis)) {
 			$synopsisM[$i] = "Sorry there is no blurb";
 		}
 	}
-
-	// // this tests to see if the data array is populated.
-	// $targetA = [];
-	// $targetM = [];
-	// $targetA[] = $responseA->data;
-	// $targetM[] = $responseM->data;
-	// if (empty($targetA) || empty($targetM)) {
-	// 	echo "This should be empty";
-	// } else {
-	// 	echo "this should be full";
-	// }
-	// $alt = 'Sorry image not found.'; 
-
-	/** need to remove as these are for test. */
-
-	// var_dump('https://kitsu.io/api/edge/anime?filter[text]=amazing-nurse-nanako');
-	//  var_dump('https://kitsu.io/api/edge/anime?filter[text]=amazing-nurse-nanako?page[limit]=5&page[offset]=0');
-	// echo isLogedIn();
 
 
 include('inc/nav-bar.php');
@@ -257,12 +231,12 @@ include('inc/nav-bar.php');
 		<?php
 			if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 		?>
-			<a href="reset-password.php" class="btn Reset-btn">Reset password</a>
+			<a href="reset-password.php" class="btn Reset_btn">Reset password</a>
 			<div class="user_likeA">
-			<a href="inc/favirot/anime-fav.php" class="btn Reset-btn">Liked Anime</a>
+			<a href="anime-fav.php" class="btn anime_btn">Liked Anime</a>
 			</div>
 			<div class="user_likeM">
-			<a href="inc/favirot/manga-fav.php" class="btn Reset-btn">Liked Manga</a> 
+			<a href="manga-fav.php" class="btn manga_btn">Liked Manga</a> 
 			</div>
 		<?php 
 			}
